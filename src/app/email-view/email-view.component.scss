@@ -1,0 +1,15 @@
+.email-view {
+
+  .email-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+  }
+}
+
