@@ -1,0 +1,11 @@
+.email-detail {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+
+  mat-label {
+    font-size: 18px;
+    margin-right: 5px;
+    font-weight: 800;
+  }
+}

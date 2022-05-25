@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div class="email-detail" mat-dialog-content>
+  <div>
+    <mat-label>Name</mat-label>
+    <span>{{data.name}}</span>
+  </div>
+  <div>
+    <mat-label>Watched Folder</mat-label>
+    <span>{{data.watchedFolder}}</span>
+  </div>
+  <div>
+    <mat-label>Provider</mat-label>
+    <span>{{data.provider}}</span>
+  </div>
+  <div>
+    <mat-label>Store Attachments</mat-label>
+    <span>{{data.storeAttachments ? 'yes' : 'no'}}</span>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Close</button>
+</div>

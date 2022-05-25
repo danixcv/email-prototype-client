@@ -1,16 +1,26 @@
 <div class="email-view my-theme">
   <ng-container *ngIf="!editMode">
     <h2>Email list</h2>
-    <mat-list>
+    <mat-list class="list-container">
         <mat-list-item *ngFor="let email of emailList">
           <div class="email-item">
             <span>{{email.name}}</span>
-            <button mat-raised-button color="primary" (click)="onEdit(email.id!)">Edit</button>
-            <button mat-raised-button color="warn" (click)="onDelete(email.id!)">Delete</button>
+            <div>
+              <button mat-icon-button (click)="onShow(email.id!)">
+                <i class="fa fa-eye"></i>
+              </button>
+              <button mat-icon-button color="primary" (click)="onEdit(email.id!)">
+                <i class="fa fa-pen"></i>
+              </button>
+              <button mat-icon-button color="warn" (click)="onDelete(email.id!)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
           </div>
+          <mat-divider></mat-divider>
         </mat-list-item>
     </mat-list>
-    <button mat-button (click)="onAddNew()">Add new</button>
+    <button mat-flat-button color="primary" (click)="onAddNew()">Add new</button>
   </ng-container>
   <ng-container *ngIf="editMode">
     <h2 *ngIf="$any(form.value).id">Edit Email</h2>
@@ -18,7 +28,7 @@
     <form class="email-form" [formGroup]="form">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" type="text">
+        <input matInput type="email" formControlName="name" type="text">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Watched Folder</mat-label>
@@ -34,7 +44,7 @@
       </mat-form-field>
       <p><mat-checkbox formControlName="storeAttachments" name="some_name" checked="true">Store Attachments</mat-checkbox></p>
     </form>
-    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid">Save</button>
-    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">Save</button>
+    <button mat-flat-button (click)="refresh()">Cancel</button>
   </ng-container>
 </div>

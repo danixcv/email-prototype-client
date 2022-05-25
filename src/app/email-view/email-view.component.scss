@@ -1,9 +1,30 @@
 .email-view {
 
-  .email-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .list-container {
+    margin-bottom: 10px;
+    width: 380px;
+
+    .email-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      width: 100%;
+
+      span {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      button {
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+
   }
 
   .email-form {

@@ -1,5 +1,7 @@
+import { EmailDialogComponent } from './../email-dialog/email-dialog.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../core/api/ApiService';
 import { Email } from '../core/models/Email';
@@ -18,11 +20,11 @@ export class EmailViewComponent implements OnInit, OnDestroy {
   providerList: Provider[];
   editMode = false;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private dialog: MatDialog) {
     this.providerList = Object.values(Provider);
     this.form = new FormGroup({
       id: new FormControl(null),
-      name: new FormControl(null, Validators.required),
+      name: new FormControl(null, [Validators.required, Validators.email]),
       watchedFolder: new FormControl(null),
       provider: new FormControl(null),
       storeAttachments: new FormControl(false),
@@ -50,15 +52,25 @@ export class EmailViewComponent implements OnInit, OnDestroy {
     this.editMode = true;
   }
 
-  onCancel(): void {
-    this.editMode = false;
-    this.form.reset();
+  onShow(id: string): void {
+    const email = this.emailList.find(e => e.id === id) || null;
+    if (!email) {
+      this.refresh();
+      return;
+    }
+    const dialogRef = this.dialog.open(EmailDialogComponent, {
+      width: '250px',
+      data: email,
+    });
   }
 
   onEdit(id: string): void {
     this.editMode = true;
     const email = this.emailList.find(e => e.id === id);
-    if (!email) return;
+    if (!email) {
+      this.refresh();
+      return;
+    }
     this.form.patchValue(email);
   }
 

@@ -21,3 +21,7 @@ $my-theme: mat-light-theme(
   // use our theme with angular-material-theme mixin
   @include angular-material-theme($my-theme);
 }
+
+.mat-dialog-container {
+  background-color: white;
+}
